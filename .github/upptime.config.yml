@@ -1,0 +1,34 @@
+owner: Foly-Investment
+repo: foly-status
+userAgent: Foly-Uptime-Monitor
+assignees:
+  - eugenkhudoliiv
+
+sites:
+  - name: Foly API
+    url: https://api.foly.app/healthz
+    expectedStatus: 200
+    method: GET
+  - name: Foly App
+    url: https://app.foly.app
+    expectedStatus: 200
+  - name: Foly Marketing
+    url: https://foly.app
+    expectedStatus: 200
+
+status-website:
+  cname: status.foly.app
+  name: Foly Status
+  description: Real-time status of Foly services
+  theme: dark
+  logoUrl: https://foly.app/logo.svg
+  introTitle: "Foly Service Status"
+  introMessage: "All systems are monitored every 5 minutes."
+  navbar:
+    - title: Foly App
+      href: https://app.foly.app
+    - title: Marketing
+      href: https://foly.app
+
+i18n:
+  - locale: en

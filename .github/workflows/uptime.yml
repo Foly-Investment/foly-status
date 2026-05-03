@@ -1,0 +1,22 @@
+name: Uptime CI
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  uptime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upptime
+        uses: upptime/uptime-monitor@v2
+        with:
+          UPPTIME_GH_APP_CLIENT_ID: ${{ vars.UPPTIME_GH_APP_CLIENT_ID }}
+          UPPTIME_GH_APP_CLIENT_SECRET: ${{ vars.UPPTIME_GH_APP_CLIENT_SECRET }}
+          UPPTIME_GH_APP_INSTALLATION_ID: ${{ vars.UPPTIME_GH_APP_INSTALLATION_ID }}
+          UPPTIME_GH_APP_PRIVATE_KEY: ${{ secrets.UPPTIME_GH_APP_PRIVATE_KEY }}
