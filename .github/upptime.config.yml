@@ -7,14 +7,20 @@ assignees:
 sites:
   - name: Foly API
     url: https://api.foly.app/healthz
-    expectedStatus: 200
     method: GET
+    expectedStatusCodes:
+      - 200
+    # Down if the healthz body no longer reports healthy (not just non-200).
+    # Body contract: {"status":"healthy","timestamp":"..."} — Foly.Api Program.cs /healthz.
+    __dangerous__body_down_if_text_missing: '"status":"healthy"'
   - name: Foly App
     url: https://app.foly.app
-    expectedStatus: 200
+    expectedStatusCodes:
+      - 200
   - name: Foly Marketing
     url: https://foly.app
-    expectedStatus: 200
+    expectedStatusCodes:
+      - 200
 
 status-website:
   cname: status.foly.app

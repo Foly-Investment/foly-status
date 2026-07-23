@@ -21,7 +21,7 @@ probes endpoints, records results, and regenerates a static site published to Gi
 
 | Name | URL | Expect |
 | --- | --- | --- |
-| Foly API | `https://api.foly.app/healthz` | 200 |
+| Foly API | `https://api.foly.app/healthz` | 200 + body contains `"status":"healthy"` |
 | Foly App | `https://app.foly.app` | 200 |
 | Foly Marketing | `https://foly.app` | 200 |
 
@@ -32,7 +32,7 @@ Edit the `sites:` list in [`.github/upptime.config.yml`](.github/upptime.config.
 ```yaml
 - name: Service Name
   url: https://example.com/healthz
-  expectedStatus: 200   # optional
+  expectedStatusCodes: [200]   # optional; default accepts any 2xx/3xx
   method: GET           # optional, default GET
   # optional: timeout, icon, group, shouldNotify
 ```
