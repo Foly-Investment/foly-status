@@ -10,24 +10,27 @@ probes endpoints, records results, and regenerates a static site published to Gi
 
 ## How it works
 
-- **Config:** [`.github/upptime.config.yml`](.github/upptime.config.yml) — owner
-  `Foly-Investment`, repo `foly-status`, dark theme, CNAME `status.foly.app`, single locale
-  (`en`), issues assigned to `eugenkhudoliiv`.
-- **Workflow:** [`.github/workflows/uptime.yml`](.github/workflows/uptime.yml) — runs
-  `upptime/uptime-monitor@v2` on `schedule: */5 * * * *` (every 5 min) + `workflow_dispatch`.
-  Needs `contents: write`, `issues: write`, `pull-requests: write`.
+- **Config:** [`.upptimerc.yml`](.upptimerc.yml) — owner
+  `Foly-Investment`, repo `foly-status`, dark theme, CNAME `status.foly.app`, issues assigned to `shikigami12`.
+  **Upptime only reads this path** — the config sat at `.github/upptime.config.yml`
+  until 2026-09-10, which is why every run failed and the workflow was disabled.
+- **Workflows:** the eight files under [`.github/workflows/`](.github/workflows/) are the
+  upstream Upptime template (v1.44) verbatim — Setup, Uptime (every 5 min), Response Time,
+  Graphs, Static Site (builds and deploys to `gh-pages`), Summary (rewrites `README.md`),
+  Update Template, Updates. **Setup CI regenerates them from `.upptimerc.yml`**; never edit
+  them by hand.
 
 ### Monitored endpoints (current)
 
 | Name | URL | Expect |
 | --- | --- | --- |
 | Foly API | `https://api.foly.app/healthz` | 200 + body contains `"status":"healthy"` |
-| Foly App | `https://app.foly.app` | 200 |
+| Foly App | `https://app.foly.app/en-US/` | 200 |
 | Foly Marketing | `https://foly.app` | 200 |
 
 ## Add / change a monitored endpoint
 
-Edit the `sites:` list in [`.github/upptime.config.yml`](.github/upptime.config.yml):
+Edit the `sites:` list in [`.upptimerc.yml`](.upptimerc.yml):
 
 ```yaml
 - name: Service Name
@@ -37,21 +40,26 @@ Edit the `sites:` list in [`.github/upptime.config.yml`](.github/upptime.config.
   # optional: timeout, icon, group, shouldNotify
 ```
 
-Commit it — the cron picks it up within ~5 minutes. To change the polling cadence, edit the
-cron in the workflow.
+Commit it — Setup CI regenerates the workflows and the next Uptime CI run picks it up.
+Change the cadence with `workflowSchedule` in the config, not in a workflow file.
 
 ## Generated — do NOT hand-edit
 
-The workflow regenerates these on every run; local edits are overwritten:
-`history/`, `api/`, `graphs/`, `status-website/`, and the `README.md` badges/table.
+The workflows regenerate these; local edits are overwritten: `history/`, `api/`, `graphs/`,
+`status-website/`, `README.md` (Summary CI) and `.github/workflows/*.yml` (Setup CI).
 
 ## Notes & gotchas
 
 - **No notification backends** are configured (no Slack/Discord/email/Telegram). Down
   endpoints open GitHub issues assigned to the configured assignee; add a `notifications`
   block to the config if alerts are needed.
-- Upptime authenticates via a GitHub App; credentials are org-level
-  variables/secrets (`UPPTIME_GH_APP_*`) — not in this repo.
+- **Auth:** every workflow uses `secrets.GH_PAT` (a classic PAT with `repo` + `workflow`
+  scopes) or a GitHub App (`vars.GH_APP_ID` + `secrets.GH_APP_PRIVATE_KEY`), falling back to
+  `GITHUB_TOKEN` — which cannot regenerate workflows (Setup CI) or trigger downstream runs,
+  so one of the two must be set on the repo.
+- **Publishing:** Static Site CI pushes `gh-pages`; GitHub Pages must be enabled on that
+  branch with custom domain `status.foly.app`, and Cloudflare DNS needs
+  `CNAME status → foly-investment.github.io` (DNS-only until the certificate is issued).
 - The published status page is **public**.
 - Conventional Commits enforced if husky/commitlint is set up; otherwise just edit YAML → commit.
 
