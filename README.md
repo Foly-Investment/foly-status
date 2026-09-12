@@ -8,11 +8,11 @@ Live at **https://status.foly.app**.
 
 ## Services monitored
 
-| Service | Probe | Down when |
-| --- | --- | --- |
-| Foly API | `https://api.foly.app/healthz` | non-200, or the body stops saying `"status":"healthy"` |
-| Foly App | `https://app.foly.app/en-US/` | non-200 |
-| Foly Marketing | `https://foly.app` | non-200 |
+| Service        | Probe                          | Down when                                              |
+| -------------- | ------------------------------ | ------------------------------------------------------ |
+| Foly API       | `https://api.foly.app/healthz` | non-200, or the body stops saying `"status":"healthy"` |
+| Foly App       | `https://app.foly.app/en-US/`  | non-200                                                |
+| Foly Marketing | `https://foly.app`             | non-200                                                |
 
 ## How it works
 
