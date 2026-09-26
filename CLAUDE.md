@@ -25,8 +25,10 @@ probes endpoints, records results, and regenerates a static site published to Gi
 | Name | URL | Expect |
 | --- | --- | --- |
 | Foly API | `https://api.foly.app/healthz` | 200 + body contains `"status":"healthy"` |
+| Foly API readiness | `https://api.foly.app/healthz/ready` | 200 + body contains `"status":"Healthy"` (Degraded = down) |
 | Foly App | `https://app.foly.app/en-US/` | 200 |
 | Foly Marketing | `https://foly.app` | 200 |
+| Foly Marketing (www) | `https://www.foly.app` | 200 / 301 / 308 (522 until its DNS is fixed) |
 
 ## Add / change a monitored endpoint
 
