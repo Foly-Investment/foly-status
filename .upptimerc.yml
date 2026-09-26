@@ -19,14 +19,16 @@ sites:
     __dangerous__body_down_if_text_missing: '"status":"healthy"'
   - name: Foly API readiness
     # /healthz only proves the process is up; /ready exercises Postgres, Redis, Hangfire and
-    # Vault (incl. the API's own Vault token TTL) and is what the CD deploy gate checks.
-    # Body contract: {"status":"Healthy","checks":{...}} — capital H, unlike /healthz.
-    # "Degraded" (e.g. Vault token < 7 days left) also counts as down here, on purpose.
+    # Vault (incl. the API's own Vault token TTL). Unhealthy answers 503, which is down via
+    # expectedStatusCodes; the body_down match covers a 200 that still says Unhealthy. Degraded
+    # (200, e.g. the API's Vault token nears expiry) is a working API with an operator to-do,
+    # so it shows as degraded, not down. Upptime applies body checks only to an "up" response.
     url: https://api.foly.app/healthz/ready
     method: GET
     expectedStatusCodes:
       - 200
-    __dangerous__body_down_if_text_missing: '"status":"Healthy"'
+    __dangerous__body_down: '"status":"Unhealthy"'
+    __dangerous__body_degraded: '"status":"Degraded"'
   - name: Foly App
     # The root of app.foly.app 302s to the served locale bundle; probe the bundle itself.
     url: https://app.foly.app/en-US/
