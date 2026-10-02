@@ -18,6 +18,24 @@
     "dailyMinutesDown": {}
   },
   {
+    "name": "Foly API readiness",
+    "url": "https://api.foly.app/healthz/ready",
+    "icon": "https://icons.duckduckgo.com/ip3/api.foly.app.ico",
+    "slug": "foly-api-readiness",
+    "status": "up",
+    "uptime": "100.00%",
+    "uptimeDay": "100.00%",
+    "uptimeWeek": "100.00%",
+    "uptimeMonth": "100.00%",
+    "uptimeYear": "100.00%",
+    "time": 0,
+    "timeDay": 0,
+    "timeWeek": 0,
+    "timeMonth": 0,
+    "timeYear": 0,
+    "dailyMinutesDown": {}
+  },
+  {
     "name": "Foly App",
     "url": "https://app.foly.app/en-US/",
     "icon": "https://icons.duckduckgo.com/ip3/app.foly.app.ico",
@@ -52,5 +70,25 @@
     "timeMonth": 245,
     "timeYear": 245,
     "dailyMinutesDown": {}
+  },
+  {
+    "name": "Foly Marketing (www)",
+    "url": "https://www.foly.app",
+    "icon": "https://icons.duckduckgo.com/ip3/www.foly.app.ico",
+    "slug": "foly-marketing-www",
+    "status": "up",
+    "uptime": "0.00%",
+    "uptimeDay": "0.00%",
+    "uptimeWeek": "0.00%",
+    "uptimeMonth": "0.00%",
+    "uptimeYear": "0.00%",
+    "time": 0,
+    "timeDay": 0,
+    "timeWeek": 0,
+    "timeMonth": 0,
+    "timeYear": 0,
+    "dailyMinutesDown": {
+      "2026-10-02": 125
+    }
   }
 ]
