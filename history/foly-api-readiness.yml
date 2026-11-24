@@ -1,7 +1,7 @@
 url: https://api.foly.app/healthz/ready
 status: up
 code: 200
-responseTime: 541
-lastUpdated: 2026-11-23T03:35:34.701Z
+responseTime: 574
+lastUpdated: 2026-11-24T06:50:20.398Z
 startTime: 2026-10-02T19:08:40.085Z
 generator: Upptime <https://github.com/upptime/upptime>
